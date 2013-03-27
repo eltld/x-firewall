@@ -32,5 +32,12 @@
             android:text="@string/setting_service"
             style="@style/BootstrapButton"
             />
+
+    <ProgressBar
+            android:id="@+id/pb_loading"
+            style="@style/ListSpinner"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
 </LinearLayout>
 
