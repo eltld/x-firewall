@@ -4,16 +4,32 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:background="@drawable/main_bg"
+              android:gravity="center"
         >
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello World, MainActivity"
+            android:layout_marginBottom="60dp"
             />
     <Button android:id="@+id/run_btn"
             android:layout_width="150dip"
             android:layout_height="50dip"
             android:text="@string/run_service"
+            style="@style/BootstrapButton"
+            android:layout_marginBottom="10dp"
+            />
+    <Button android:id="@+id/stop_btn"
+            android:layout_width="150dip"
+            android:layout_height="50dip"
+            android:text="@string/stop_service"
+            style="@style/BootstrapButton"
+            android:layout_marginBottom="10dp"
+            />
+    <Button android:id="@+id/setting_btn"
+            android:layout_width="150dip"
+            android:layout_height="50dip"
+            android:text="@string/setting_service"
             style="@style/BootstrapButton"
             />
 </LinearLayout>
