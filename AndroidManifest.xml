@@ -20,4 +20,6 @@
             </intent-filter>
         </service>
     </application>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"></uses-permission>
 </manifest>
