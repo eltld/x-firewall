@@ -39,6 +39,7 @@
             android:layout_height="50dip"
             android:text="@string/setting_service"
             style="@style/BootstrapButton"
+            android:layout_marginBottom="10dp"
             />
     <Button android:id="@+id/view_log_btn"
             android:layout_width="150dip"
