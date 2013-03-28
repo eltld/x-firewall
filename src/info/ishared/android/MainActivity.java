@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
+import info.ishared.android.activity.SettingActivity;
 import info.ishared.android.service.FirewallService;
 import info.ishared.android.ui.CustomerProgressDialog;
+import info.ishared.android.util.PageJumpUtils;
 import info.ishared.android.util.SystemUtils;
 import info.ishared.android.util.ToastUtils;
 import info.ishared.android.util.ViewUtils;
@@ -84,8 +86,9 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                 stopServiceAndRefreshUI();
                 break;
             case R.id.setting_btn:
-                boolean isWork = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
-                ToastUtils.showMessage(this, isWork + "");
+//                boolean isWork = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
+//                ToastUtils.showMessage(this, isWork + "");
+                PageJumpUtils.jump(this, SettingActivity.class);
                 break;
             case R.id.view_log_btn:
                 mController.test();

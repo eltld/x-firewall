@@ -36,5 +36,7 @@
     <color name="text_shadow">#000000</color>
 
     <color name="background_selected">#1fb6ed</color>
+    <color name="bg_gray">#FFE3E3E7</color>
+    <color name="white">#FFFFFFFF</color>
 
 </resources>
