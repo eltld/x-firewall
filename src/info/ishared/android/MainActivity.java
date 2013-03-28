@@ -44,20 +44,23 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
 
     private Handler mHandler;
 
-    private ServiceConnection mServiceConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mService = ((FirewallService.MyBinder)service).getService();
-        }
+    private MainController mController;
 
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
+//    private ServiceConnection mServiceConnection = new ServiceConnection() {
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            mService = ((FirewallService.MyBinder)service).getService();
+//        }
+//
+//        public void onServiceDisconnected(ComponentName name) {
+//
+//        }
+//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        mController = new MainController(this);
 
         mHandler=new Handler();
         mRunButton.setOnClickListener(this);
@@ -85,6 +88,7 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                 ToastUtils.showMessage(this,isWork+"");
                 break;
             case R.id.view_log_btn:
+                mController.test();
                 break;
             default:
                 break;
