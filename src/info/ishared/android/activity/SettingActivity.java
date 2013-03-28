@@ -30,7 +30,7 @@ public class SettingActivity  extends TabActivity {
         setContentView(R.layout.setting_firewall);
 
         main_tab_new_message=(TextView) findViewById(R.id.main_tab_new_message);
-        main_tab_new_message.setVisibility(View.VISIBLE);
+//        main_tab_new_message.setVisibility(View.VISIBLE);
         main_tab_new_message.setText("10");
 
         tabHost=this.getTabHost();
@@ -38,15 +38,15 @@ public class SettingActivity  extends TabActivity {
         Intent intent;
 
         intent=new Intent().setClass(this, MainActivity.class);
-        spec=tabHost.newTabSpec("添加考试").setIndicator("添加考试").setContent(intent);
+        spec=tabHost.newTabSpec("通讯录").setIndicator("通讯录").setContent(intent);
         tabHost.addTab(spec);
 
         intent=new Intent().setClass(this,MainActivity.class);
-        spec=tabHost.newTabSpec("我的考试").setIndicator("我的考试").setContent(intent);
+        spec=tabHost.newTabSpec("黑名单").setIndicator("黑名单").setContent(intent);
         tabHost.addTab(spec);
 
         intent=new Intent().setClass(this, MainActivity.class);
-        spec=tabHost.newTabSpec("我的通知").setIndicator("我的通知").setContent(intent);
+        spec=tabHost.newTabSpec("白名单").setIndicator("白名单").setContent(intent);
         tabHost.addTab(spec);
 
 
@@ -63,13 +63,13 @@ public class SettingActivity  extends TabActivity {
                 // TODO Auto-generated method stub
                 switch (checkedId) {
                     case R.id.main_tab_addExam://添加考试
-                        tabHost.setCurrentTabByTag("添加考试");
+                        tabHost.setCurrentTabByTag("通讯录");
                         break;
                     case R.id.main_tab_myExam://我的考试
-                        tabHost.setCurrentTabByTag("我的考试");
+                        tabHost.setCurrentTabByTag("黑名单");
                         break;
                     case R.id.main_tab_message://我的通知
-                        tabHost.setCurrentTabByTag("我的通知");
+                        tabHost.setCurrentTabByTag("白名单");
                         break;
                     case R.id.main_tab_settings://设置
                         tabHost.setCurrentTabByTag("设置");
