@@ -1,7 +1,6 @@
 package info.ishared.android.bean;
 
 import java.io.Serializable;
-import java.security.PrivateKey;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,14 +9,18 @@ import java.security.PrivateKey;
  * Time: PM4:17
  */
 public class ContactsInfo implements Serializable {
-    private String number;
-    private String name;
+    private Long id;
+    private String phoneNumber;
+    private String contactName;
     private String numberType;
 
+    public ContactsInfo(){
 
-    public ContactsInfo(String number, String name, String numberType) {
-        this.number = number;
-        this.name = name;
+    }
+
+    public ContactsInfo(String phoneNumber, String contactName, String numberType) {
+        this.phoneNumber = phoneNumber;
+        this.contactName = contactName;
         this.numberType = numberType;
     }
 
@@ -29,28 +32,37 @@ public class ContactsInfo implements Serializable {
         this.numberType = numberType;
     }
 
-    public String getName() {
-        return name;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "ContactsInfo{" +
-                "number='" + number + '\'' +
-                ", name='" + name + '\'' +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", contactName='" + contactName + '\'' +
                 ", numberType='" + numberType + '\'' +
                 '}';
     }
+
 }

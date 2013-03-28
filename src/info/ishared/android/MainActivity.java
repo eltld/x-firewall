@@ -40,7 +40,7 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
 
     private FirewallService mService;
 
-    private boolean isServiceWorked=false;
+    private boolean isServiceWorked = false;
 
     private Handler mHandler;
 
@@ -62,13 +62,13 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
         setContentView(R.layout.main);
         mController = new MainController(this);
 
-        mHandler=new Handler();
+        mHandler = new Handler();
         mRunButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
         mSettingButton.setOnClickListener(this);
         mViewLogBtn.setOnClickListener(this);
 
-        isServiceWorked =  SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
+        isServiceWorked = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
         refreshButtonAndTextView(isServiceWorked);
     }
 
@@ -76,7 +76,7 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.run_btn:
                 startServiceAndRefreshUI();
                 break;
@@ -84,8 +84,8 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                 stopServiceAndRefreshUI();
                 break;
             case R.id.setting_btn:
-                boolean isWork= SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
-                ToastUtils.showMessage(this,isWork+"");
+                boolean isWork = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
+                ToastUtils.showMessage(this, isWork + "");
                 break;
             case R.id.view_log_btn:
                 mController.test();
@@ -95,14 +95,14 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
         }
     }
 
-    private void startServiceAndRefreshUI(){
-        Intent intent=new Intent(this,FirewallService.class);
+    private void startServiceAndRefreshUI() {
+        Intent intent = new Intent(this, FirewallService.class);
         this.startService(intent);
 
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                while (!SystemUtils.isServiceWorked(MainActivity.this, "info.ishared.android.service.FirewallService")){
+                while (!SystemUtils.isServiceWorked(MainActivity.this, "info.ishared.android.service.FirewallService")) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -113,14 +113,15 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
             }
         });
     }
-    private void stopServiceAndRefreshUI(){
-        Intent intent=new Intent(this,FirewallService.class);
+
+    private void stopServiceAndRefreshUI() {
+        Intent intent = new Intent(this, FirewallService.class);
         this.stopService(intent);
 
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                while (SystemUtils.isServiceWorked(MainActivity.this, "info.ishared.android.service.FirewallService")){
+                while (SystemUtils.isServiceWorked(MainActivity.this, "info.ishared.android.service.FirewallService")) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -132,17 +133,29 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
         });
     }
 
-    private void refreshButtonAndTextView(boolean isServiceWorked){
-        if(isServiceWorked){
-            mTextView.setText("来电防火墙正在运行中....");
-            ViewUtils.hideView(mRunButton);
-            ViewUtils.showView(mStopButton);
-            ViewUtils.showView(mLoading);
-        }else{
-            mTextView.setText("来电防火墙已停止拦截....");
-            ViewUtils.hideView(mStopButton);
-            ViewUtils.showView(mRunButton);
-            ViewUtils.hideView(mLoading);
+    private void refreshButtonAndTextView(boolean isServiceWorked) {
+        if (isServiceWorked) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTextView.setText("来电防火墙正在运行中....");
+                    ViewUtils.hideView(mRunButton);
+                    ViewUtils.showView(mStopButton);
+                    ViewUtils.showView(mLoading);
+                }
+            });
+
+        } else {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTextView.setText("来电防火墙已停止拦截....");
+                    ViewUtils.hideView(mStopButton);
+                    ViewUtils.showView(mRunButton);
+                    ViewUtils.hideView(mLoading);
+                }
+            });
+
         }
     }
 }
