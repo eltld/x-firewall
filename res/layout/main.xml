@@ -7,10 +7,18 @@
               android:gravity="center"
         >
     <TextView
+            android:id="@+id/service_status_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello World, MainActivity"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="30dp"
+            />
+    <ProgressBar
+            android:id="@+id/pb_loading"
+            style="@style/ListSpinner"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_marginBottom="30dp"
             />
     <Button android:id="@+id/run_btn"
             android:layout_width="150dip"
@@ -32,13 +40,14 @@
             android:text="@string/setting_service"
             style="@style/BootstrapButton"
             />
-
-    <ProgressBar
-            android:id="@+id/pb_loading"
-            style="@style/ListSpinner"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
+    <Button android:id="@+id/view_log_btn"
+            android:layout_width="150dip"
+            android:layout_height="50dip"
+            android:text="@string/view_log"
+            style="@style/BootstrapButton"
             />
+
+
 
 </LinearLayout>
 
