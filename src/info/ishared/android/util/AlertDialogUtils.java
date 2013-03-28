@@ -3,6 +3,7 @@ package info.ishared.android.util;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import info.ishared.android.ui.CustomerProgressDialog;
 
 /**
  * User: Lee
@@ -40,6 +41,10 @@ public class AlertDialogUtils {
                 dialog.cancel();
             }
         }).show();
+    }
+
+    public static CustomerProgressDialog createProgressDialog(Context context){
+        return  new CustomerProgressDialog(context);
     }
 
 }
