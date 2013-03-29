@@ -22,10 +22,28 @@ public class ContactsInfoDBOperator {
         this.mDBHelper = DBHelper.getInstance(context);
     }
 
-
     public List<ContactsInfo> listAllContactsInfoList() {
+        return queryContactsInfo(" 1=1 ");
+    }
+    public ContactsInfo getContactsInfoByPhoneNumber(String phoneNumber){
+        String whereClause=DBConfig.ContactsInfo.PHONE_NUMBER+" = '"+phoneNumber+"'";
+        List<ContactsInfo> contactsInfoList= this.queryContactsInfo(whereClause);
+        if(contactsInfoList.isEmpty()){
+            return null;
+        }
+        return contactsInfoList.get(0);
+    }
+
+    public List<ContactsInfo> queryContactInfoByNumberType(String numberType){
+        String whereClause=DBConfig.ContactsInfo.NUMBER_TYPE+" = '"+numberType+"'";
+        List<ContactsInfo> contactsInfoList= this.queryContactsInfo(whereClause);
+        return  contactsInfoList;
+    }
+
+    private List<ContactsInfo> queryContactsInfo(String whereClause) {
         this.mDBHelper.open();
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
+        builder.appendWhere(whereClause);
         builder.setTables(DBConfig.ContactsInfo.TABLE_NAME);
         String arrColumn[] = {
                 DBConfig.ContactsInfo.ID, DBConfig.ContactsInfo.PHONE_NUMBER, DBConfig.ContactsInfo.CONTACT_NAME, DBConfig.ContactsInfo.NUMBER_TYPE
@@ -48,6 +66,7 @@ public class ContactsInfoDBOperator {
 
     }
 
+
     public void createContactsInfo(ContactsInfo contactsInfo){
         this.mDBHelper.open();
         ContentValues values = new ContentValues();
@@ -57,4 +76,23 @@ public class ContactsInfoDBOperator {
         this.mDBHelper.getMDB().insertOrThrow(DBConfig.ContactsInfo.TABLE_NAME, null, values);
         this.mDBHelper.close();
     }
+
+
+    public void updateContactsInfoType(Long id,String numberType){
+        this.mDBHelper.open();
+        ContentValues values = new ContentValues();
+        values.put(DBConfig.ContactsInfo.NUMBER_TYPE, numberType);
+        StringBuilder sb = new StringBuilder();
+        sb.append(DBConfig.ContactsInfo.ID + "=" + id + "");
+        this.mDBHelper.getMDB().update(DBConfig.ContactsInfo.TABLE_NAME, values, sb.toString(), null);
+        this.mDBHelper.close();
+    }
+
+    public void deleteContactInfoByNumber(String phoneNumber){
+        this.mDBHelper.open();
+        String whereClause=DBConfig.ContactsInfo.PHONE_NUMBER +" = '"+phoneNumber+"'";
+        this.mDBHelper.getMDB().delete(DBConfig.ContactsInfo.TABLE_NAME,whereClause,null);
+        this.mDBHelper.close();
+    }
+
 }

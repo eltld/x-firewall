@@ -54,8 +54,8 @@ public class ContactsUtils {
     public static String getContactsNameByPhoneNumber(Context context,String phoneNumber){
         ContentResolver resolver = context.getContentResolver();
 // 获取手机联系人
-        String whereCause=ContactsContract.CommonDataKinds.Phone.NUMBER+ " = '"+phoneNumber+"'";
-        Cursor phoneCursor = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, PHONES_PROJECTION, whereCause, null, null);
+        String whereClause=ContactsContract.CommonDataKinds.Phone.NUMBER+ " = '"+phoneNumber+"'";
+        Cursor phoneCursor = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, PHONES_PROJECTION, whereClause, null, null);
         if (phoneCursor != null) {
             if (phoneCursor.moveToNext()) {
                 return phoneCursor.getString(PHONES_DISPLAY_NAME_INDEX);

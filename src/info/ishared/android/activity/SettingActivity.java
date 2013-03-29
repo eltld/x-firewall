@@ -45,7 +45,7 @@ public class SettingActivity  extends TabActivity {
         spec=tabHost.newTabSpec("黑名单").setIndicator("黑名单").setContent(intent);
         tabHost.addTab(spec);
 
-        intent=new Intent().setClass(this, MainActivity.class);
+        intent=new Intent().setClass(this, WhiteContactListActivity.class);
         spec=tabHost.newTabSpec("白名单").setIndicator("白名单").setContent(intent);
         tabHost.addTab(spec);
 

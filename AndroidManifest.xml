@@ -17,6 +17,8 @@
         <activity  android:name=".activity.SettingActivity"></activity>
         <activity android:name=".activity.ViewBlockLogActivity"/>
         <activity android:name=".activity.ContactsListActivity"/>
+        <activity android:name=".activity.BlackContactsListActivity"/>
+        <activity android:name=".activity.WhiteContactListActivity"/>
         <service android:name=".service.FirewallService">
             <intent-filter>
                 <action android:name=".service.FirewallService"/>
