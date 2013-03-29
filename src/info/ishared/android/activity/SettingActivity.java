@@ -37,7 +37,7 @@ public class SettingActivity  extends TabActivity {
         TabHost.TabSpec spec;
         Intent intent;
 
-        intent=new Intent().setClass(this, MainActivity.class);
+        intent=new Intent().setClass(this, ContactsListActivity.class);
         spec=tabHost.newTabSpec("通讯录").setIndicator("通讯录").setContent(intent);
         tabHost.addTab(spec);
 
