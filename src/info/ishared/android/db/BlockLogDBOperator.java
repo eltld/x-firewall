@@ -64,7 +64,7 @@ public class BlockLogDBOperator {
 
     public void cleanBlockLog(){
         this.mDBHelper.open();
-        this.mDBHelper.getMDB().delete(DBConfig.BlockLog.TABLE_NAME,"1=1",null);
+        this.mDBHelper.getMDB().delete(DBConfig.BlockLog.TABLE_NAME,null,null);
         this.mDBHelper.close();
 
     }
