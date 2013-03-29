@@ -8,10 +8,15 @@ import android.media.AudioManager;
 import android.telephony.TelephonyManager;
 import com.android.internal.telephony.ITelephony;
 import info.ishared.android.bean.BlockLog;
+import info.ishared.android.bean.ContactsInfo;
+import info.ishared.android.bean.NumberType;
 import info.ishared.android.db.BlockLogDBOperator;
+import info.ishared.android.db.ContactsInfoDBOperator;
 import info.ishared.android.util.ContactsUtils;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,11 +30,13 @@ public class PhoneStatReceiver extends BroadcastReceiver {
     private AudioManager mAudioManager;
     private ITelephony mITelephony;
     private BlockLogDBOperator blockLogDBOperator;
+    private ContactsInfoDBOperator contactsInfoDBOperator;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
         blockLogDBOperator = new BlockLogDBOperator(context);
+        contactsInfoDBOperator = new ContactsInfoDBOperator(context);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         //利用反射获取隐藏的endcall方法
         TelephonyManager mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -53,14 +60,17 @@ public class PhoneStatReceiver extends BroadcastReceiver {
                     incomingNumber = intent.getStringExtra("incoming_number");
 //                    if(number.equals(BLOCKED_NUMBER)){//拦截指定的电话号码
                     //先静音处理
-                    mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                    try {
-                        mITelephony.endCall();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    List<String> blockNumbers=this.queryContactsInfoByNumberType(NumberType.BLACK);
+                    if(blockNumbers.contains(incomingNumber)) {
+                        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        try {
+                            mITelephony.endCall();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                        LogBlockPhoneNumber(context, incomingNumber);
                     }
-                    mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                    LogBlockPhoneNumber(context,incomingNumber);
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK://摘机
 //                        Log.i(TAG, "incoming ACCEPT :"+ incoming_number);
@@ -73,10 +83,19 @@ public class PhoneStatReceiver extends BroadcastReceiver {
         }
     }
 
-    private void LogBlockPhoneNumber(Context context,String phoneNumber){
+    private void LogBlockPhoneNumber(Context context, String phoneNumber) {
         BlockLog blockLog = new BlockLog();
         blockLog.setPhoneNumber(phoneNumber);
         blockLog.setContactsName(ContactsUtils.getContactsNameByPhoneNumber(context, phoneNumber));
         blockLogDBOperator.insertBlockLog(blockLog);
+    }
+
+    public List<String> queryContactsInfoByNumberType(NumberType numberType) {
+        List<String> phoneNumbers=new ArrayList<String>();
+        List<ContactsInfo> contactsInfoList = this.contactsInfoDBOperator.queryContactInfoByNumberType(numberType.name());
+        for(ContactsInfo contactsInfo : contactsInfoList){
+            phoneNumbers.add(contactsInfo.getPhoneNumber());
+        }
+        return phoneNumbers;
     }
 }

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.R;
@@ -16,6 +17,7 @@ import info.ishared.android.bean.NumberType;
 import info.ishared.android.util.AlertDialogUtils;
 import info.ishared.android.util.ContactsUtils;
 import info.ishared.android.util.ToastUtils;
+import info.ishared.android.util.ViewUtils;
 import roboguice.inject.InjectView;
 
 import java.util.*;
@@ -29,14 +31,15 @@ import java.util.*;
 public class ContactsListActivity extends RoboSherlockActivity {
 
     @InjectView(R.id.contacts_list)
-    private ListView mListView;
+    protected ListView mListView;
+    @InjectView(R.id.contacts_loading)
+    private ProgressBar mLoading;
 
-    private SimpleAdapter adapter;
-    private List<Map<String, String>> contactsData = new ArrayList<Map<String, String>>();
+    protected SimpleAdapter adapter;
+    protected List<Map<String, String>> contactsData = new ArrayList<Map<String, String>>();
 
     protected ContactsListController mController;
 
-    private ProgressDialog mProgressDialog = null;
     private Handler mHandler;
 
     private static final int ADD_TO_WHITE = 0;
@@ -47,9 +50,7 @@ public class ContactsListActivity extends RoboSherlockActivity {
         setContentView(R.layout.contacts_list_view);
         mController = new ContactsListController(this);
         mHandler = new Handler();
-        mProgressDialog = AlertDialogUtils.createProgressDialog(this);
-        mProgressDialog.setMessage("正在加载联系人....");
-        mProgressDialog.show();
+        ViewUtils.showView(mLoading);
         initListViewData();
         initListViewGUI();
     }
@@ -119,7 +120,7 @@ public class ContactsListActivity extends RoboSherlockActivity {
                     contactsData.add(map);
                 }
                 adapter.notifyDataSetChanged();
-                mProgressDialog.hide();
+                ViewUtils.hideView(mLoading);
             }
         });
 

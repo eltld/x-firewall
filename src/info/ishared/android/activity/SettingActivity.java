@@ -17,6 +17,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import info.ishared.android.MainActivity;
 import info.ishared.android.R;
+import info.ishared.android.util.PageJumpUtils;
 
 public class SettingActivity  extends TabActivity {
     /** Called when the activity is first created. */
@@ -82,4 +83,9 @@ public class SettingActivity  extends TabActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        PageJumpUtils.jump(this,MainActivity.class);
+        this.finish();
+    }
 }

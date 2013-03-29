@@ -42,11 +42,13 @@ public class ContactsListController {
         }
     }
 
-    public List<ContactsInfo> queryContractInfoByNumberType(NumberType numberType){
+    public List<ContactsInfo> queryContactInfoByNumberType(NumberType numberType){
         List<ContactsInfo> contactsInfoList = this.contactsInfoDBOperator.queryContactInfoByNumberType(numberType.name());
         return contactsInfoList;
     }
 
-
+    public void deleteContactInfoByPhoneNumber(String phoneNumber){
+        this.contactsInfoDBOperator.deleteContactInfoByNumber(phoneNumber);
+    }
 
 }

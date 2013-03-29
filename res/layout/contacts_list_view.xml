@@ -5,6 +5,12 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+    <ProgressBar
+            android:id="@+id/contacts_loading"
+            style="@style/ListSpinner"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
     <ListView
             android:layout_marginTop="2dip"
             android:id="@+id/contacts_list"
