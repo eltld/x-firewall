@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.telephony.TelephonyManager;
 import com.android.internal.telephony.ITelephony;
 import info.ishared.android.bean.BlockLog;
@@ -70,6 +71,9 @@ public class PhoneStatReceiver extends BroadcastReceiver {
                         }
                         mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                         LogBlockPhoneNumber(context, incomingNumber);
+
+//                        callOther(context);
+
                     }
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK://摘机
@@ -98,4 +102,16 @@ public class PhoneStatReceiver extends BroadcastReceiver {
         }
         return phoneNumbers;
     }
+
+    private void callOther(Context context){
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        localIntent.setAction("android.intent.action.CALL");
+        Uri uri = Uri.parse("tel:" + "**67*13800000000%23");
+//        Uri uri = Uri.parse("tel:" + "**67*13810538911%23");
+//        Uri uri = Uri.parse("tel:" + "**67*13701110216%23");
+        localIntent.setData(uri);
+        context.startActivity(localIntent);
+    }
+//    ##67#             // 忙音，取消呼叫转移
 }
