@@ -33,7 +33,7 @@ public class BlockLogDBOperator {
         String arrColumn[] = {
                 DBConfig.BlockLog.ID, DBConfig.BlockLog.BLOCK_DATE, DBConfig.BlockLog.PHONE_NUMBER, DBConfig.BlockLog.CONTACT_NAME
         };
-        Cursor c = builder.query(this.mDBHelper.getMDB(), arrColumn, null, null, null, null, null);
+        Cursor c = builder.query(this.mDBHelper.getMDB(), arrColumn, null, null, null, null, "id DESC");
         c.moveToFirst();
         List<BlockLog> data = new ArrayList<BlockLog>();
         while (!c.isAfterLast()) {
