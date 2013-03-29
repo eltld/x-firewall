@@ -25,7 +25,7 @@
 
         <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="64dip" >
+                android:layout_height="54dip" >
 
             <RadioGroup
                     android:id="@+id/main_tab_group"
