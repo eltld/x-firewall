@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
@@ -14,6 +13,7 @@ import info.ishared.android.bean.BlockLog;
 import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.util.AlertDialogUtils;
 import info.ishared.android.util.ContactsUtils;
+import info.ishared.android.util.ToastUtils;
 import roboguice.inject.InjectView;
 
 import java.util.*;
@@ -34,6 +34,9 @@ public class ContactsListActivity extends RoboSherlockActivity {
 
     private ProgressDialog mProgressDialog=null;
     private Handler mHandler;
+
+    private static final int ADD_TO_WHITE=0;
+    private static final int ADD_TO_BLACK=1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,34 @@ public class ContactsListActivity extends RoboSherlockActivity {
             }
         };
         mListView.setAdapter(adapter);
+        mListView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+            public void onCreateContextMenu(ContextMenu menu, View v,
+                                            ContextMenu.ContextMenuInfo menuInfo) {
+                menu.add(0, ADD_TO_WHITE, 0, "添加到白名单");
+                menu.add(0, ADD_TO_BLACK, 0, "添加到黑名单");
+
+//                MenuInflater mInflater = getMenuInflater();
+//                mInflater.inflate(R.menu.contacts_context_menu, menu);
+//                super.onCreateContextMenu(menu, v, menuInfo);
+            }
+        });
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case ADD_TO_WHITE:
+                ToastUtils.showMessage(this,"白名单");
+                break;
+            case ADD_TO_BLACK:
+                ToastUtils.showMessage(this,"黑名单");
+                break;
+            default:
+                break;
+        }
+
+        return false;
     }
 
     private void initListViewData() {
