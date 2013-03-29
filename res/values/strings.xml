@@ -5,4 +5,6 @@
     <string name="stop_service">停止来电防火墙</string>
     <string name="setting_service">设置防火墙规则</string>
     <string name="view_log">查看拦截日志</string>
+    <string name="clean">清除</string>
+    <string name="back">返回</string>
 </resources>

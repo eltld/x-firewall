@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.activity.SettingActivity;
+import info.ishared.android.activity.ViewBlockLogActivity;
 import info.ishared.android.service.FirewallService;
 import info.ishared.android.ui.CustomerProgressDialog;
 import info.ishared.android.util.PageJumpUtils;
@@ -91,7 +92,7 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                 PageJumpUtils.jump(this, SettingActivity.class);
                 break;
             case R.id.view_log_btn:
-                mController.test();
+                PageJumpUtils.jump(this, ViewBlockLogActivity.class);
                 break;
             default:
                 break;

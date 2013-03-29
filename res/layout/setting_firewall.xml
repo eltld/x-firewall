@@ -41,6 +41,7 @@
                         android:id="@+id/main_tab_addExam"
                         style="@style/MMTabButton"
                         android:layout_weight="1.0"
+                        android:checked="true"
                         android:drawableTop="@drawable/bg_checkbox_icon_menu_0"
                         android:text="通讯录" />
 
@@ -48,7 +49,6 @@
                         android:id="@+id/main_tab_myExam"
                         style="@style/MMTabButton"
                         android:layout_weight="1.0"
-                        android:checked="true"
                         android:drawableTop="@drawable/bg_checkbox_icon_menu_1"
                         android:text="黑名单" />
 
