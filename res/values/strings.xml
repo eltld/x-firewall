@@ -9,4 +9,17 @@
     <string name="back">返回</string>
     <string name="add_to_white">添加到白名单</string>
     <string name="add_to_black">添加到黑名单</string>
+    <string name="select_block_rule">选择拦截规则</string>
+    <string name="block_black">拦截黑名单</string>
+    <string name="allow_white">允许白名单</string>
+    <string name="block_all">全部拦截</string>
+    <string name="ring_select">选择对方接听提示音</string>
+    <string name="user_busy">通话中</string>
+    <string name="null_number">空号</string>
+    <string name="fee_arrears">欠费</string>
+    <string name="shut_down">关机</string>
+    <string name="number">号码:</string>
+    <string name="rule_setting">设置</string>
+    <string name="note">说明:</string>
+    <string name="note_text">对方接听后的提示音,是基于号码转移后的提示音,请准备相应的转移号码,然后点击设置按钮</string>
 </resources>

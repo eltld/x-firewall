@@ -51,7 +51,7 @@ public class SettingActivity  extends TabActivity {
         tabHost.addTab(spec);
 
 
-        intent=new Intent().setClass(this, MainActivity.class);
+        intent=new Intent().setClass(this, RuleActivity.class);
         spec=tabHost.newTabSpec("设置").setIndicator("设置").setContent(intent);
         tabHost.addTab(spec);
         tabHost.setCurrentTab(0);
