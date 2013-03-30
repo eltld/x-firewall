@@ -129,4 +129,10 @@ public class ContactsListActivity extends RoboSherlockActivity {
     protected List<ContactsInfo> initData(){
        return ContactsUtils.getPhoneContacts(ContactsListActivity.this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initListViewData();
+    }
 }
