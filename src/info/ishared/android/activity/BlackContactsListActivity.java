@@ -44,6 +44,8 @@ public class BlackContactsListActivity  extends ContactsListActivity {
                     public void execute(Object... objects) {
 //                        ToastUtils.showMessage(BlackContactsListActivity.this,objects[0]+","+objects[1]);
                         mController.sendContactToBlockList(objects[1].toString(),objects[0].toString(),NumberType.BLACK);
+//                        adapter.notifyDataSetChanged();
+                        initData();
                         adapter.notifyDataSetChanged();
                     }
                 });
