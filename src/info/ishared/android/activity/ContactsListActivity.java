@@ -5,19 +5,14 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
+import android.widget.*;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
+import info.ishared.android.MainActivity;
 import info.ishared.android.R;
 import info.ishared.android.bean.BlockLog;
 import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.bean.NumberType;
-import info.ishared.android.util.AlertDialogUtils;
-import info.ishared.android.util.ContactsUtils;
-import info.ishared.android.util.ToastUtils;
-import info.ishared.android.util.ViewUtils;
+import info.ishared.android.util.*;
 import roboguice.inject.InjectView;
 
 import java.util.*;
@@ -35,6 +30,13 @@ public class ContactsListActivity extends RoboSherlockActivity {
     @InjectView(R.id.contacts_loading)
     private ProgressBar mLoading;
 
+    @InjectView(R.id.contacts_list_back_btn)
+    private Button mBackBtn;
+
+    @InjectView(R.id.contacts_list_add_btn)
+    private Button mAddBtn;
+
+
     protected SimpleAdapter adapter;
     protected List<Map<String, String>> contactsData = new ArrayList<Map<String, String>>();
 
@@ -50,10 +52,19 @@ public class ContactsListActivity extends RoboSherlockActivity {
         setContentView(R.layout.contacts_list_view);
         mController = new ContactsListController(this);
         mHandler = new Handler();
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PageJumpUtils.jump(ContactsListActivity.this,MainActivity.class);
+                ContactsListActivity.this.finish();
+            }
+        });
+        ViewUtils.hideView(mAddBtn);
         ViewUtils.showView(mLoading);
         initListViewData();
         initListViewGUI();
     }
+
 
     private void initListViewGUI() {
         adapter = new SimpleAdapter(this, contactsData, R.layout.contacts_list_item, new String[]{"name", "number"}, new int[]{R.id.contacts_name, R.id.contacts_number}) {

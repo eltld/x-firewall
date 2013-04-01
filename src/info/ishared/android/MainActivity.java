@@ -82,6 +82,7 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.run_btn:
                 startServiceAndRefreshUI();
+
                 break;
             case R.id.stop_btn:
                 stopServiceAndRefreshUI();
@@ -90,9 +91,11 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
 //                boolean isWork = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
 //                ToastUtils.showMessage(this, isWork + "");
                 PageJumpUtils.jump(this, SettingActivity.class);
+                this.finish();
                 break;
             case R.id.view_log_btn:
                 PageJumpUtils.jump(this, ViewBlockLogActivity.class);
+                this.finish();
                 break;
             default:
                 break;

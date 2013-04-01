@@ -6,6 +6,7 @@
     <string name="setting_service">设置防火墙规则</string>
     <string name="view_log">查看拦截日志</string>
     <string name="clean">清除</string>
+    <string name="add">添加</string>
     <string name="back">返回</string>
     <string name="add_to_white">添加到白名单</string>
     <string name="add_to_black">添加到黑名单</string>
@@ -22,4 +23,5 @@
     <string name="rule_setting">设置</string>
     <string name="note">说明:</string>
     <string name="note_text">对方接听后的提示音,是基于号码转移后的提示音,请准备相应的转移号码,然后点击设置按钮</string>
+    <string name="name">名称:</string>
 </resources>

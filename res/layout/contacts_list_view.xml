@@ -5,6 +5,30 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/stripe_repeat"
+            android:id="@+id/contacts_list_toolbar"
+            >
+        <Button android:id="@+id/contacts_list_back_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/back"
+                style="@style/BootstrapButton"
+                />
+        <Button android:id="@+id/contacts_list_add_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/add"
+                style="@style/BootstrapButton"
+                android:layout_alignParentRight="true"
+                />
+
+    </RelativeLayout>
+
     <ProgressBar
             android:id="@+id/contacts_loading"
             style="@style/ListSpinner"
