@@ -46,5 +46,14 @@ public class DBConfig {
                 + ");";
     }
 
+    public static class BlockRule {
+        public static final String TABLE_NAME = "block_rule";
 
+        public static final String BLOCK_TYPE = "block_type";
+
+        public static final String CREATE_BLOCK_RULE_SQL = "create table " + TABLE_NAME
+                + "("
+                + BLOCK_TYPE + " TEXT "
+                + ");";
+    }
 }

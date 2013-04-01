@@ -8,12 +8,12 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.telephony.TelephonyManager;
 import com.android.internal.telephony.ITelephony;
-import info.ishared.android.bean.BlockLog;
-import info.ishared.android.bean.ContactsInfo;
-import info.ishared.android.bean.NumberType;
+import info.ishared.android.bean.*;
 import info.ishared.android.db.BlockLogDBOperator;
+import info.ishared.android.db.BlockRuleDBOperator;
 import info.ishared.android.db.ContactsInfoDBOperator;
 import info.ishared.android.util.ContactsUtils;
+import info.ishared.android.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -31,12 +31,14 @@ public class PhoneStatReceiver extends BroadcastReceiver {
     private AudioManager mAudioManager;
     private ITelephony mITelephony;
     private BlockLogDBOperator blockLogDBOperator;
+    private BlockRuleDBOperator blockRuleDBOperator;
     private ContactsInfoDBOperator contactsInfoDBOperator;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
         blockLogDBOperator = new BlockLogDBOperator(context);
+        blockRuleDBOperator = new BlockRuleDBOperator(context);
         contactsInfoDBOperator = new ContactsInfoDBOperator(context);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         //利用反射获取隐藏的endcall方法
@@ -59,32 +61,44 @@ public class PhoneStatReceiver extends BroadcastReceiver {
             switch (tm.getCallState()) {
                 case TelephonyManager.CALL_STATE_RINGING://来电响铃
                     incomingNumber = intent.getStringExtra("incoming_number");
-//                    if(number.equals(BLOCKED_NUMBER)){//拦截指定的电话号码
-                    //先静音处理
-                    List<String> blockNumbers=this.queryContactsInfoByNumberType(NumberType.BLACK);
-                    if(blockNumbers.contains(incomingNumber)) {
-                        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        try {
-                            mITelephony.endCall();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                        LogBlockPhoneNumber(context, incomingNumber);
-
-//                        callOther(context);
-
+                    BlockRuleType blockRuleType = this.getCurrentBlockRule();
+                    switch (blockRuleType){
+                        case BLOCK_BLACK_LIST:
+                            List<String> blockNumbers=this.queryContactsInfoByNumberType(NumberType.BLACK);
+                            if(StringUtils.isInNumberList(blockNumbers,incomingNumber)) {
+                                endCallAndLogTheNumber(context,incomingNumber);
+                            }
+                            break;
+                        case ALLOW_WHITE_LIST:
+                            List<String> whiteList=this.queryContactsInfoByNumberType(NumberType.WHITE);
+                            if(!StringUtils.isInNumberList(whiteList,incomingNumber)){
+                                endCallAndLogTheNumber(context,incomingNumber);
+                            }
+                            break;
+                        case BLOCK_ALL:
+                            endCallAndLogTheNumber(context,incomingNumber);
+                            break;
                     }
+
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK://摘机
-//                        Log.i(TAG, "incoming ACCEPT :"+ incoming_number);
                     break;
-
                 case TelephonyManager.CALL_STATE_IDLE://挂机
-//                        Log.i(TAG, "incoming IDLE");
                     break;
             }
         }
+    }
+
+    private void endCallAndLogTheNumber(Context context,String incomingNumber){
+        //先静音处理
+        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        try {
+            mITelephony.endCall();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        LogBlockPhoneNumber(context, incomingNumber);
     }
 
     private void LogBlockPhoneNumber(Context context, String phoneNumber) {
@@ -103,6 +117,16 @@ public class PhoneStatReceiver extends BroadcastReceiver {
         return phoneNumbers;
     }
 
+    public BlockRuleType getCurrentBlockRule(){
+        List<BlockRule> blockRules = this.blockRuleDBOperator.getBlockRule();
+        if(blockRules.isEmpty()){
+            return BlockRuleType.BLOCK_BLACK_LIST;
+        }else{
+            return BlockRuleType.valueOf(blockRules.get(0).getRuleType());
+        }
+    }
+
+
     private void callOther(Context context){
         Intent localIntent = new Intent();
         localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -113,5 +137,13 @@ public class PhoneStatReceiver extends BroadcastReceiver {
         localIntent.setData(uri);
         context.startActivity(localIntent);
     }
+
+
 //    ##67#             // 忙音，取消呼叫转移
+    /**
+     * 四、中国电信手机设置与取消
+     * 遇忙转移：拨打*90+电话号码
+     取消：拨打*900
+     *
+     */
 }

@@ -31,7 +31,7 @@
             android:layout_marginBottom="30dp"
             >
         <RadioButton
-                android:id="@+id/btn_0"
+                android:id="@+id/block_black_btn"
                 android:layout_width="80dip"
                 android:layout_height="30dip"
                 android:text="@string/block_black"
@@ -44,7 +44,7 @@
                 android:background="@drawable/radio"
                 />
         <RadioButton
-                android:id="@+id/btn_1"
+                android:id="@+id/allow_white_btn"
                 android:layout_width="80dip"
                 android:layout_height="30dip"
                 android:text="@string/allow_white"
@@ -57,7 +57,7 @@
                 android:background="@drawable/radio"
                 />
         <RadioButton
-                android:id="@+id/btn_2"
+                android:id="@+id/block_all_btn"
                 android:layout_width="80dip"
                 android:layout_height="30dip"
                 android:text="@string/block_all"

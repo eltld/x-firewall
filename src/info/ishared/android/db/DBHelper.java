@@ -66,6 +66,7 @@ public class DBHelper {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DBConfig.ContactsInfo.CREATE_CONTACTS_INFO_SQL);
             db.execSQL(DBConfig.BlockLog.CREATE_BLOCK_LOG_SQL);
+            db.execSQL(DBConfig.BlockRule.CREATE_BLOCK_RULE_SQL);
         }
 
         @Override
@@ -73,6 +74,7 @@ public class DBHelper {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS " + DBConfig.ContactsInfo.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + DBConfig.BlockLog.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + DBConfig.BlockRule.TABLE_NAME);
             onCreate(db);
         }
 
