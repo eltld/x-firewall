@@ -5,8 +5,14 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import info.ishared.android.R;
 import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.bean.NumberType;
+import info.ishared.android.util.AlertDialogUtils;
+import info.ishared.android.util.ToastUtils;
+import info.ishared.android.util.ViewUtils;
+import roboguice.inject.InjectView;
 
 import java.util.*;
 
@@ -17,8 +23,27 @@ import java.util.*;
  * Time: 下午9:41
  */
 public class WhiteContactListActivity extends ContactsListActivity {
+    @InjectView(R.id.contacts_list_add_btn)
+    private Button mAddBtn;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ViewUtils.showView(mAddBtn);
+        mAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialogUtils.showInputDialog(WhiteContactListActivity.this, "", new AlertDialogUtils.ReturnExecutor() {
+                    @Override
+                    public void execute(Object... objects) {
+//                        ToastUtils.showMessage(WhiteContactListActivity.this, objects[0] + "," + objects[1]);
+                        mController.sendContactToBlockList(objects[1].toString(),objects[0].toString(),NumberType.WHITE);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+
         mListView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 
             public void onCreateContextMenu(ContextMenu menu, View v,

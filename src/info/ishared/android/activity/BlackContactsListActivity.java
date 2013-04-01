@@ -31,24 +31,20 @@ public class BlackContactsListActivity  extends ContactsListActivity {
     @InjectView(R.id.contacts_list_add_btn)
     private Button mAddBtn;
 
-    private EditText mName;
-    private EditText mNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.showView(mAddBtn);
-        LayoutInflater inflater = (LayoutInflater) BlackContactsListActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_input_layout, null);
-        mName=(EditText)layout.findViewById(R.id.dialog_input_name);
-        mNumber=(EditText)layout.findViewById(R.id.dialog_input_number);
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialogUtils.showInputDialog(BlackContactsListActivity.this,"",new AlertDialogUtils.Executor() {
+                AlertDialogUtils.showInputDialog(BlackContactsListActivity.this,"",new AlertDialogUtils.ReturnExecutor() {
                     @Override
-                    public void execute() {
-                        ToastUtils.showMessage(BlackContactsListActivity.this,mName.getText().toString()+","+mNumber.getText().toString());
+                    public void execute(Object... objects) {
+//                        ToastUtils.showMessage(BlackContactsListActivity.this,objects[0]+","+objects[1]);
+                        mController.sendContactToBlockList(objects[1].toString(),objects[0].toString(),NumberType.BLACK);
+                        adapter.notifyDataSetChanged();
                     }
                 });
             }

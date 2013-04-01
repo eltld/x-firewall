@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import info.ishared.android.R;
 import info.ishared.android.ui.CustomerProgressDialog;
@@ -19,6 +20,9 @@ public class AlertDialogUtils {
         void execute();
     }
 
+    public interface ReturnExecutor{
+        void execute(Object... obj);
+    }
     /**
      * @param context
      * @param message
@@ -47,17 +51,19 @@ public class AlertDialogUtils {
         }).show();
     }
 
-    public static CustomerProgressDialog createProgressDialog(Context context){
-        return  new CustomerProgressDialog(context);
+    public static CustomerProgressDialog createProgressDialog(Context context) {
+        return new CustomerProgressDialog(context);
     }
 
-    public static void showInputDialog(Context context, String message, final Executor executor){
+    public static void showInputDialog(Context context, String message, final ReturnExecutor executor) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_input_layout, null);
+        final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_input_layout, null);
         builder.setView(layout).setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                executor.execute();
+                String inputName=((EditText)layout.findViewById(R.id.dialog_input_name)).getText().toString();
+                String inputNumber=((EditText)layout.findViewById(R.id.dialog_input_number)).getText().toString();
+                executor.execute(inputName,inputNumber);
             }
         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
