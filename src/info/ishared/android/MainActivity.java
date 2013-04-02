@@ -165,6 +165,8 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                     ViewUtils.hideView(mRunButton);
                     ViewUtils.showView(mStopButton);
                     ViewUtils.showView(mLoading);
+                    ViewUtils.showView(mBlockRuleStatusTextView);
+                    ViewUtils.showView(mTransferStatusTextView);
                 }
             });
 
@@ -176,6 +178,8 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
                     ViewUtils.hideView(mStopButton);
                     ViewUtils.showView(mRunButton);
                     ViewUtils.hideView(mLoading);
+                    ViewUtils.hideView(mBlockRuleStatusTextView);
+                    ViewUtils.hideView(mTransferStatusTextView);
                 }
             });
 
