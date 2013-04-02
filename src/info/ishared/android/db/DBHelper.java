@@ -67,6 +67,7 @@ public class DBHelper {
             db.execSQL(DBConfig.ContactsInfo.CREATE_CONTACTS_INFO_SQL);
             db.execSQL(DBConfig.BlockLog.CREATE_BLOCK_LOG_SQL);
             db.execSQL(DBConfig.BlockRule.CREATE_BLOCK_RULE_SQL);
+            db.execSQL(DBConfig.TransferNumber.CREATE_TRANSFER_NUMBER_SQL);
         }
 
         @Override
@@ -75,6 +76,7 @@ public class DBHelper {
             db.execSQL("DROP TABLE IF EXISTS " + DBConfig.ContactsInfo.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + DBConfig.BlockLog.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + DBConfig.BlockRule.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + DBConfig.TransferNumber.TABLE_NAME);
             onCreate(db);
         }
 

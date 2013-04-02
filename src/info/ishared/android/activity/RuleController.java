@@ -2,7 +2,9 @@ package info.ishared.android.activity;
 
 import info.ishared.android.bean.BlockRule;
 import info.ishared.android.bean.BlockRuleType;
+import info.ishared.android.bean.TransferNumber;
 import info.ishared.android.db.BlockRuleDBOperator;
+import info.ishared.android.db.TransferNumberDBOperator;
 
 import java.util.List;
 
@@ -16,10 +18,12 @@ public class RuleController {
 
     private RuleActivity ruleActivity;
     private BlockRuleDBOperator blockRuleDBOperator;
+    private TransferNumberDBOperator transferNumberDBOperator;
 
     public RuleController(RuleActivity ruleActivity) {
         this.ruleActivity = ruleActivity;
         this.blockRuleDBOperator = new BlockRuleDBOperator(ruleActivity);
+        this.transferNumberDBOperator = new TransferNumberDBOperator(ruleActivity);
     }
 
     public void createOrUpdateBlockRule(String ruleType){
@@ -38,5 +42,17 @@ public class RuleController {
         }else{
             return BlockRuleType.valueOf(blockRules.get(0).getRuleType());
         }
+    }
+
+    public TransferNumber getDefaultTransferNumber(){
+        return this.transferNumberDBOperator.queryDefaultTransferNumber();
+    }
+
+    public TransferNumber queryTransferNumberByOperatorsAndVoiceTye(String operators,String voiceType){
+        return this.transferNumberDBOperator.queryTransferNumberByOperatorsAndVoiceTye(operators,voiceType);
+    }
+
+    public void createOrUpdateTransferNumber(TransferNumber transferNumber){
+        this.transferNumberDBOperator.updateTransferNumber(transferNumber);
     }
 }

@@ -28,7 +28,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             >
         <RadioButton
                 android:id="@+id/block_black_btn"
@@ -70,6 +70,86 @@
                 android:background="@drawable/radio"
                 />
     </RadioGroup>
+
+    <TextView
+            android:id="@+id/rule_firewall_operators_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_mobile_operators"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            />
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bootstrap_divider"
+            android:layout_marginBottom="10dp"
+            />
+    <RadioGroup
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            >
+        <RadioButton
+                android:id="@+id/china_mobile_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/china_mobile"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:checked="true"
+                android:button="@null"
+                android:background="@drawable/radio"
+                />
+        <RadioButton
+                android:id="@+id/china_unicom_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/china_unicom"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:button="@null"
+                android:background="@drawable/radio"
+                />
+        <RadioButton
+                android:id="@+id/china_telecom_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/china_telecom"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:button="@null"
+                android:background="@drawable/radio"
+                />
+
+        <RadioButton
+                android:id="@+id/other_operators_btn"
+                android:layout_width="60dip"
+                android:layout_height="30dip"
+                android:text="@string/other_operator"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:button="@null"
+                android:background="@drawable/radio"
+                />
+    </RadioGroup>
+
+
     <TextView
             android:id="@+id/rule_ring_info_txt"
             android:layout_width="fill_parent"
@@ -152,7 +232,7 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="20dp"
                   android:gravity="center"
-                  android:layout_marginBottom="30dp"
+                  android:layout_marginBottom="20dp"
             >
         <TextView
                 android:id="@+id/note"
@@ -161,15 +241,18 @@
                 android:text="@string/number"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 />
         <EditText
                 android:id="@+id/input_number"
-                android:layout_width="140dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:inputType="phone"
                 android:background="@drawable/edit_text_background"
                 />
         <Button android:id="@+id/rule_setting_btn"
@@ -177,7 +260,7 @@
                 android:layout_height="30dip"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/rule_setting"
+                android:text="@string/rule_setting_save"
                 style="@style/BootstrapButton"
                 />
      </LinearLayout>

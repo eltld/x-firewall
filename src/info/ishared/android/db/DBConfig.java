@@ -56,4 +56,21 @@ public class DBConfig {
                 + BLOCK_TYPE + " TEXT "
                 + ");";
     }
+
+    public static class TransferNumber {
+        public static final String TABLE_NAME = "transfer_number";
+
+        public static final String OPERATORS = "operators";
+        public static final String VOICE_TYPE = "voice_type";
+        public static final String CALL_NUMBER = "call_number";
+        public static final String SELECTED = "selected";
+
+        public static final String CREATE_TRANSFER_NUMBER_SQL = "create table " + TABLE_NAME
+                + "("
+                + OPERATORS + " TEXT, "
+                + VOICE_TYPE + " TEXT, "
+                + CALL_NUMBER + " TEXT, "
+                + SELECTED + " INT "
+                + ");";
+    }
 }
