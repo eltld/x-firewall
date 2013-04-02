@@ -20,6 +20,9 @@ import info.ishared.android.util.PageJumpUtils;
 import info.ishared.android.util.ToastUtils;
 import roboguice.inject.InjectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lee
@@ -66,9 +69,17 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
     private String operators = OperatorsType.CHINA_MOBILE.name();
     private String voiceType = VoicePromptsType.BUSY.name();
 
+    private List<String> notAccessNumber = new ArrayList<String>();
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rule_layout);
+
+        notAccessNumber.add("110");
+        notAccessNumber.add("120");
+        notAccessNumber.add("119");
+
+
         mController = new RuleController(this);
         mHandler = new Handler();
 
@@ -89,7 +100,6 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
         mShutDownBtn.setOnClickListener(this);
 
 
-
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -108,23 +118,23 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
         }
     }
 
-    private void radioButtonOnChangeEvent(){
-        TransferNumber transferNumber = this.mController.queryTransferNumberByOperatorsAndVoiceTye(operators,voiceType);
-        if(transferNumber == null){
-            if(OperatorsType.CHINA_MOBILE.name().equals(operators) && VoicePromptsType.NULL_NUMBER.name().equals(voiceType)){
+    private void radioButtonOnChangeEvent() {
+        TransferNumber transferNumber = this.mController.queryTransferNumberByOperatorsAndVoiceTye(operators, voiceType);
+        if (transferNumber == null) {
+            if (OperatorsType.CHINA_MOBILE.name().equals(operators) && VoicePromptsType.NULL_NUMBER.name().equals(voiceType)) {
                 mInputNumber.setText("**67*13800000000#");
-            }else{
+            } else {
                 mInputNumber.setText("");
             }
-        }else{
+        } else {
             setRadioStatusByTransferNumber(transferNumber);
         }
     }
 
-    private void setRadioStatusByTransferNumber(TransferNumber transferNumber){
+    private void setRadioStatusByTransferNumber(TransferNumber transferNumber) {
         operators = transferNumber.getOperators();
         voiceType = transferNumber.getVoiceType();
-        switch (OperatorsType.valueOf(transferNumber.getOperators())){
+        switch (OperatorsType.valueOf(transferNumber.getOperators())) {
             case CHINA_MOBILE:
                 mChinaMobileBtn.setChecked(true);
                 break;
@@ -138,7 +148,7 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
                 mOtherOperators.setChecked(true);
                 break;
         }
-        switch (VoicePromptsType.valueOf(transferNumber.getVoiceType())){
+        switch (VoicePromptsType.valueOf(transferNumber.getVoiceType())) {
             case BUSY:
                 mUserBusyBtn.setChecked(true);
                 break;
@@ -232,14 +242,18 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
 
     private void callTransferNumber() {
         String phoneNumber = mInputNumber.getText().toString();
-        TransferNumber transferNumber=new TransferNumber();
+        if (phoneNumber.trim().equals("") || notAccessNumber.contains(phoneNumber.trim())) {
+            ToastUtils.showMessage(this, "错误,设置号码为空或非法号码..");
+            return;
+        }
+        TransferNumber transferNumber = new TransferNumber();
         transferNumber.setOperators(operators);
         transferNumber.setVoiceType(voiceType);
         transferNumber.setCallNumber(phoneNumber);
         transferNumber.setSelected(true);
         mController.createOrUpdateTransferNumber(transferNumber);
         callPhone(phoneNumber);
-        ToastUtils.showMessage(this,"设置成功..");
+        ToastUtils.showMessage(this, "设置成功..");
     }
 
     private void callPhone(String phoneNumber) {
@@ -248,7 +262,7 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
         localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         localIntent.setAction("android.intent.action.CALL");
 //        Uri uri = Uri.parse("tel:" + "**67*13800000000%23");
-        Uri uri = Uri.parse("tel:" + phoneNumber.replaceAll("#","%23"));
+        Uri uri = Uri.parse("tel:" + phoneNumber.replaceAll("#", "%23"));
 //        Uri uri = Uri.parse("tel:" + "**67*13810538911%23");
 //        Uri uri = Uri.parse("tel:" + "**67*13701110216%23");
         localIntent.setData(uri);
