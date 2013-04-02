@@ -34,6 +34,12 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
     @InjectView(R.id.service_status_txt)
     private TextView mTextView;
 
+    @InjectView(R.id.block_rule_status_txt)
+    private TextView mBlockRuleStatusTextView;
+
+    @InjectView(R.id.transfer_status_txt)
+    private TextView mTransferStatusTextView;
+
 
     private CustomerProgressDialog mDialog;
 
@@ -69,6 +75,20 @@ public class MainActivity extends RoboSherlockActivity implements View.OnClickLi
 
         isServiceWorked = SystemUtils.isServiceWorked(this, "info.ishared.android.service.FirewallService");
         refreshButtonAndTextView(isServiceWorked);
+
+        queryBlockRuleAndTransferRule();
+    }
+
+    private void queryBlockRuleAndTransferRule() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String blockRuleTxt = "拦截规则:"+mController.getBlockRuleTextViewText();
+                mBlockRuleStatusTextView.setText(blockRuleTxt);
+                String transferRuleTxt = "运营商和提示音:"+mController.getTransferRuleText();
+                mTransferStatusTextView.setText(transferRuleTxt);
+            }
+        });
     }
 
 
