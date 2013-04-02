@@ -1,25 +1,19 @@
 package info.ishared.android.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import info.ishared.android.R;
 import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.bean.NumberType;
 import info.ishared.android.util.AlertDialogUtils;
-import info.ishared.android.util.ToastUtils;
 import info.ishared.android.util.ViewUtils;
 import roboguice.inject.InjectView;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

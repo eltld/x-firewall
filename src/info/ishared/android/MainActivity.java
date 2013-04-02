@@ -1,11 +1,8 @@
 package info.ishared.android;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -17,7 +14,6 @@ import info.ishared.android.service.FirewallService;
 import info.ishared.android.ui.CustomerProgressDialog;
 import info.ishared.android.util.PageJumpUtils;
 import info.ishared.android.util.SystemUtils;
-import info.ishared.android.util.ToastUtils;
 import info.ishared.android.util.ViewUtils;
 import roboguice.inject.InjectView;
 

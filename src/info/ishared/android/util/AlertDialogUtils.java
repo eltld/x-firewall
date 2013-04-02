@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import info.ishared.android.R;

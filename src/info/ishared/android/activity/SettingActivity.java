@@ -6,10 +6,10 @@ package info.ishared.android.activity;
  * Date: 13-3-28
  * Time: 下午9:03
  */
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;

@@ -1,18 +1,20 @@
 package info.ishared.android.activity;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.*;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.MainActivity;
 import info.ishared.android.R;
-import info.ishared.android.bean.BlockLog;
 import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.bean.NumberType;
-import info.ishared.android.util.*;
+import info.ishared.android.util.ContactsUtils;
+import info.ishared.android.util.PageJumpUtils;
+import info.ishared.android.util.ViewUtils;
 import roboguice.inject.InjectView;
 
 import java.util.*;

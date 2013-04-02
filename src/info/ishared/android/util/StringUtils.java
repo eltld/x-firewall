@@ -1,7 +1,5 @@
 package info.ishared.android.util;
 
-import android.telephony.PhoneNumberUtils;
-
 import java.util.List;
 
 /**

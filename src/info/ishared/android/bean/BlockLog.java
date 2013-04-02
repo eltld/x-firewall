@@ -1,7 +1,6 @@
 package info.ishared.android.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.

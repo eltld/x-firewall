@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 import info.ishared.android.bean.BlockLog;
-import info.ishared.android.bean.ContactsInfo;
 import info.ishared.android.util.DateUtils;
 
 import java.util.ArrayList;

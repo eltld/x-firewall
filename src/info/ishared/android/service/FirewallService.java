@@ -8,10 +8,8 @@ import android.os.IBinder;
 import info.ishared.android.receiver.PhoneStatReceiver;
 import info.ishared.android.util.LogUtils;
 
-import java.util.Calendar;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created with IntelliJ IDEA.

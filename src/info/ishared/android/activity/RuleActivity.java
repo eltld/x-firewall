@@ -1,16 +1,15 @@
 package info.ishared.android.activity;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.MainActivity;
 import info.ishared.android.R;
-import info.ishared.android.bean.BlockRule;
 import info.ishared.android.bean.BlockRuleType;
 import info.ishared.android.util.PageJumpUtils;
 import info.ishared.android.util.ToastUtils;
@@ -33,6 +32,15 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
     @InjectView(R.id.block_all_btn)
     protected RadioButton mBlockAllBtn;
 
+    @InjectView(R.id.ring_user_busy_btn)
+    protected RadioButton mUserBusyBtn;
+    @InjectView(R.id.ring_fee_arrears_btn)
+    protected RadioButton mFeeArrearsBtn;
+    @InjectView(R.id.ring_null_number_btn)
+    protected RadioButton mNullNumberBtn;
+    @InjectView(R.id.ring_shut_down_btn)
+    protected RadioButton mShutDownBtn;
+
     private RuleController mController;
 
     private Handler mHandler;
@@ -46,6 +54,11 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
         mBlockBlackBtn.setOnClickListener(this);
         mAllowWhiteBtn.setOnClickListener(this);
         mBlockAllBtn.setOnClickListener(this);
+
+        mUserBusyBtn.setOnClickListener(this);
+        mFeeArrearsBtn.setOnClickListener(this);
+        mNullNumberBtn.setOnClickListener(this);
+        mShutDownBtn.setOnClickListener(this);
 
         mHandler.post(new Runnable() {
             @Override
@@ -82,6 +95,16 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
             case R.id.block_all_btn:
                 this.mController.createOrUpdateBlockRule(BlockRuleType.BLOCK_ALL.name());
                 break;
+            case R.id.ring_user_busy_btn:
+                callPhone("%23%2367%23");
+                break;
+            case R.id.ring_fee_arrears_btn:
+                break;
+            case R.id.ring_null_number_btn:
+                callPhone("**67*13800000000%23");
+                break;
+            case R.id.ring_shut_down_btn:
+                break;
         }
         ToastUtils.showMessage(this,"设置成功");
     }
@@ -90,5 +113,22 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
     public void onBackPressed() {
         PageJumpUtils.jump(this, MainActivity.class);
         this.finish();
+    }
+
+
+    private void callTransferNumberByUser(String mobilePhoneOperators,String type){
+
+    }
+
+    private void callPhone(String phoneNumber){
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        localIntent.setAction("android.intent.action.CALL");
+//        Uri uri = Uri.parse("tel:" + "**67*13800000000%23");
+        Uri uri = Uri.parse("tel:" + phoneNumber);
+//        Uri uri = Uri.parse("tel:" + "**67*13810538911%23");
+//        Uri uri = Uri.parse("tel:" + "**67*13701110216%23");
+        localIntent.setData(uri);
+        this.startActivity(localIntent);
     }
 }

@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             >
         <RadioButton
-                android:id="@+id/btn_01"
+                android:id="@+id/ring_user_busy_btn"
                 android:layout_width="60dip"
                 android:layout_height="30dip"
                 android:text="@string/user_busy"
@@ -106,7 +106,7 @@
                 android:background="@drawable/radio"
                 />
         <RadioButton
-                android:id="@+id/btn_11"
+                android:id="@+id/ring_null_number_btn"
                 android:layout_width="60dip"
                 android:layout_height="30dip"
                 android:text="@string/null_number"
@@ -119,7 +119,7 @@
                 android:background="@drawable/radio"
                 />
         <RadioButton
-                android:id="@+id/btn_21"
+                android:id="@+id/ring_fee_arrears_btn"
                 android:layout_width="60dip"
                 android:layout_height="30dip"
                 android:text="@string/fee_arrears"
@@ -132,7 +132,7 @@
                 android:background="@drawable/radio"
                 />
         <RadioButton
-                android:id="@+id/btn_31"
+                android:id="@+id/ring_shut_down_btn"
                 android:layout_width="60dip"
                 android:layout_height="30dip"
                 android:text="@string/shut_down"
