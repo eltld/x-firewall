@@ -8,9 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
+import info.ishared.android.MainActivity;
 import info.ishared.android.R;
 import info.ishared.android.bean.BlockRule;
 import info.ishared.android.bean.BlockRuleType;
+import info.ishared.android.util.PageJumpUtils;
 import info.ishared.android.util.ToastUtils;
 import roboguice.inject.InjectView;
 
@@ -82,5 +84,11 @@ public class RuleActivity extends RoboSherlockActivity implements AdapterView.On
                 break;
         }
         ToastUtils.showMessage(this,"设置成功");
+    }
+
+    @Override
+    public void onBackPressed() {
+        PageJumpUtils.jump(this, MainActivity.class);
+        this.finish();
     }
 }

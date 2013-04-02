@@ -141,9 +141,20 @@ public class ContactsListActivity extends RoboSherlockActivity {
        return ContactsUtils.getPhoneContacts(ContactsListActivity.this);
     }
 
+
+    protected void refreshViewListData(){
+        this.initListViewData();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         initListViewData();
+    }
+
+    @Override
+    public void onBackPressed() {
+        PageJumpUtils.jump(this,MainActivity.class);
+        this.finish();
     }
 }
