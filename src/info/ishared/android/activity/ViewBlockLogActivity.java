@@ -1,10 +1,15 @@
 package info.ishared.android.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -12,6 +17,7 @@ import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivit
 import info.ishared.android.MainActivity;
 import info.ishared.android.R;
 import info.ishared.android.bean.BlockLog;
+import info.ishared.android.bean.NumberType;
 import info.ishared.android.util.AlertDialogUtils;
 import info.ishared.android.util.PageJumpUtils;
 import roboguice.inject.InjectView;
@@ -71,6 +77,14 @@ public class ViewBlockLogActivity extends RoboSherlockActivity implements View.O
             }
         };
         mListView.setAdapter(adapter);
+        mListView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+            public void onCreateContextMenu(ContextMenu menu, View v,
+                                            ContextMenu.ContextMenuInfo menuInfo) {
+                menu.add(0, 0, 0, "回拨");
+
+            }
+        });
     }
 
     private void initListViewData() {
@@ -99,6 +113,22 @@ public class ViewBlockLogActivity extends RoboSherlockActivity implements View.O
     }
 
     @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        String info = logsData.get(menuInfo.position).get("info");
+        if(!"无拦截记录".equals(info)){
+            String phoneNumber=info.split(",")[1];
+            Intent localIntent = new Intent();
+            localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            localIntent.setAction("android.intent.action.CALL");
+            Uri uri = Uri.parse("tel:" + phoneNumber);
+            localIntent.setData(uri);
+            this.startActivity(localIntent);
+        }
+        return false;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.block_log_back_btn:
@@ -112,5 +142,10 @@ public class ViewBlockLogActivity extends RoboSherlockActivity implements View.O
             default:
                 break;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        PageJumpUtils.jump(this,MainActivity.class);
+        this.finish();
     }
 }
