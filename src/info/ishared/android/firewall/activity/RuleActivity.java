@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.firewall.MainActivity;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.bean.BlockRuleType;
 import info.ishared.android.firewall.bean.OperatorsType;
 import info.ishared.android.firewall.bean.TransferNumber;

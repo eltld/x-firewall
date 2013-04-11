@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.activity.SettingActivity;
 import info.ishared.android.firewall.activity.ViewBlockLogActivity;
 import info.ishared.android.firewall.service.FirewallService;

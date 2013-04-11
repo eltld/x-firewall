@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 
 /**
  * Created with IntelliJ IDEA.

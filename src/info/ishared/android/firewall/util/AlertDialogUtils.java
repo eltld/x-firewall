@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.ui.CustomerProgressDialog;
 
 /**

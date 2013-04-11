@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import info.ishared.android.firewall.MainActivity;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.bean.BlockLog;
 import info.ishared.android.firewall.util.AlertDialogUtils;
 import info.ishared.android.firewall.util.PageJumpUtils;

@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.bean.ContactsInfo;
 import info.ishared.android.firewall.bean.NumberType;
 import info.ishared.android.firewall.util.AlertDialogUtils;

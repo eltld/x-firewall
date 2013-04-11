@@ -16,7 +16,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 import android.widget.TextView;
 import info.ishared.android.firewall.MainActivity;
-import info.ishared.android.R;
+import info.ishared.android.firewall.R;
 import info.ishared.android.firewall.util.PageJumpUtils;
 
 public class SettingActivity  extends TabActivity {
